@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD with PostgreSQL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            color: green;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 400px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .message b {
+            color: green;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <hr/>
+    <h3>Edit Employee Details</h3>
+    
+    <form method="POST" action="/update/{{EmpModel.id}}">
+        {% csrf_token %}     
+        <table>
+            <tr>
+                <td>Employee ID</td>
+                <td><input type="text" name="id" value="{{EmpModel.id}}" readonly></td>
+            </tr>
+            <tr>
+                <td>Employee Name</td>
+                <td><input type="text" name="empname" value="{{EmpModel.empname}}" ></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" value="{{EmpModel.email}}" ></td>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td><input type="text" name="domain" value="{{EmpModel.domain}}" ></td>
+            </tr>
+            <tr>
+                <td>Salary</td>
+                <td><input type="text" name="salary" value="{{EmpModel.salary}}" ></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="text" name="gender" value="{{EmpModel.gender}}" ></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="UPDATE">
+                </td>
+            </tr>
+        </table> 
+    </form>
+
+    <div class="message">
+        {% if messages %}
+            {% for msg in messages %}
+                <b>{{ msg }}</b>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="{% url 'showemp' %}" class="back-button">Back to HomePage</a>
+    </div>
+
+</body>
+</html>

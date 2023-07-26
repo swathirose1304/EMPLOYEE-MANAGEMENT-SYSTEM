@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD with PostgreSQL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            color:green;
+        }
+
+        .form-container {
+            margin: 0 auto;
+            width: 400px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .message b {
+            color: green;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <hr/>
+    <div class="form-container">
+        <h3>Add New Employee</h3>
+        <hr/>
+        <form method="POST">
+            {% csrf_token %}     
+            <table>
+                <tr>
+                    <td>Employee Name</td>
+                    <td><input type="text" name="empname" placeholder="Enter Employee Name..."></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" placeholder="Enter Email..."></td>
+                </tr>
+                <tr>
+                    <td>Domain</td>
+                    <td>
+                        <select name="domain">
+                            <option selected disabled="true">---Select domain---</option>
+                            <option>Programmer</option>
+                            <option>Sales Executive</option>
+                            <option>HR</option>                   
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td><input type="text" name="salary" placeholder="Enter salary..."></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gender" value="M">Male |
+                        <input type="radio" name="gender" value="F">Female
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="ADD"/>
+                    </td>
+                </tr>
+            </table>            
+        </form>
+    </div>
+
+    <div class="message">
+        {% if messages %}
+            {% for msg in messages %}
+                <b>{{ msg }}</b>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="{% url 'showemp' %}" class="back-button">Back to HomePage</a>
+    </div>
+
+</body>
+</html>
